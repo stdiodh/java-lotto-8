@@ -56,7 +56,7 @@ public class LottoController {
                 String rawBonusNumber = inputView.readBonusNumber();
                 BonusNumber bonusNumber = parseService.createBonusNumberFromInput(rawBonusNumber);
 
-                winningNumbers.validateBonusNumber(bonusNumber);
+                bonusNumber.validateDuplicate(winningNumbers);
 
                 return bonusNumber;
             } catch (IllegalArgumentException e) {

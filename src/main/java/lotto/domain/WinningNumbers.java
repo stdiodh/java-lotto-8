@@ -9,7 +9,6 @@ public class WinningNumbers {
     private static final String ERROR_INVALID_SIZE = "[ERROR] 당첨 번호는 6개여야 합니다. 확인 후 다시 입력해주세요.";
     private static final String ERROR_DUPLICATE_NUMBER = "[ERROR] 당첨 번호에 중복된 숫자가 없어야 합니다. 확인 후 다시 입력해주세요.";
     private static final String ERROR_INVALID_RANGE = "[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다. 확인 후 다시 입력해주세요.";
-    private static final String ERROR_BONUS_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다. 확인 후 다시 입력해주세요.";
 
     public WinningNumbers(List<Integer> numbers) {
         validate(numbers);
@@ -47,11 +46,7 @@ public class WinningNumbers {
         }
     }
 
-    public void validateBonusNumber(BonusNumber bonusNumber) {
-        int bonus = bonusNumber.getNumber();
-
-        if(this.numbers.contains(bonus)){
-            throw new IllegalArgumentException(ERROR_BONUS_DUPLICATE);
-        }
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
     }
 }
