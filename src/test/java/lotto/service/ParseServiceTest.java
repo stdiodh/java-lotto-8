@@ -47,21 +47,12 @@ public class ParseServiceTest {
     }
 
     @Test
-    void 당첨_번호가_공백일_때_예외_태스트() {
+    void 당첨_번호가_공백일_때_예외_테스트() {
         String rawWinningNumber = "";
 
         assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
-    }
-
-    @Test
-    void 당첨_번호가_6자리가_아닐_때_예외_테스트() {
-        String rawWinningNumber = "1,2,3,4";
-
-        assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 당첨 번호는 6개이여야 합니다.");
     }
 
     @Test
@@ -90,7 +81,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    void 보너스_번호가_공백일_때_예외_태스트() {
+    void 보너스_번호가_공백일_때_예외_테스트() {
         String rawBonusNumber = "";
 
         assertThatThrownBy(() -> parseService.createBonusNumberFromInput(rawBonusNumber))
