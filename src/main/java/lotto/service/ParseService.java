@@ -10,6 +10,7 @@ public class ParseService {
     private static final String DELIMITER = ",";
     private static final String ERROR_NULL_VALUE = "[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.";
     private static final String ERROR_NOT_A_NUMBER = "[ERROR] 숫자가 들어오도록 다시 입력해주세요.";
+    private static final String ERROR_INVALID_WINNING_NUMBER_COUNT = "[ERROR] 당첨 번호는 6개이여야 합니다.";
 
     public PurchaseAmount createPurchaseAmountFromInput(String rawPurchaseAmount) {
         int number = validateAndParseNumber(rawPurchaseAmount);
@@ -20,9 +21,14 @@ public class ParseService {
     public WinningNumbers createWinningNumbersFromInput(String rawWinningNumber) {
         validateNullValue(rawWinningNumber);
 
-        List<Integer> numbers = Arrays.stream(rawWinningNumber.split(DELIMITER))
+        List<String> stringNumbers = Arrays.stream(rawWinningNumber.split(DELIMITER, -1))
                 .map(String::trim)
-                .map(this::parseNumber)
+                .toList();
+
+        validateWinningNumberCount(stringNumbers);
+
+        List<Integer> numbers = stringNumbers.stream()
+                .map(this::validateAndParseNumber)
                 .toList();
 
         return new WinningNumbers(numbers);
@@ -42,6 +48,12 @@ public class ParseService {
     private void validateNullValue(String value) {
         if(value == null || value.isBlank()) {
             throw new IllegalArgumentException(ERROR_NULL_VALUE);
+        }
+    }
+
+    private void validateWinningNumberCount(List<String> numbers) {
+        if(numbers.size() != 6) {
+            throw new IllegalArgumentException(ERROR_INVALID_WINNING_NUMBER_COUNT);
         }
     }
 

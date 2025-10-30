@@ -1,6 +1,8 @@
 package lotto.controller;
 
+import lotto.domain.BonusNumber;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.WinningNumbers;
 import lotto.service.ParseService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,7 +19,9 @@ public class LottoController {
     }
 
     public void run() {
-        PurchaseAmount punchaseAmount = setupPurchaseAmount();
+        PurchaseAmount purchaseAmount = setupPurchaseAmount();
+        WinningNumbers winningNumbers = setupWinningNumbers();
+        BonusNumber bonusNumber = setupBonusNumber();
     }
 
     private PurchaseAmount setupPurchaseAmount() {
@@ -26,6 +30,32 @@ public class LottoController {
                 String rawPurchaseAmount = inputView.readPurchaseAmount();
 
                 return parseService.createPurchaseAmountFromInput(rawPurchaseAmount);
+            } catch (IllegalArgumentException e) {
+                String errorMessage = e.getMessage();
+                outputView.printError(errorMessage);
+            }
+        }
+    }
+
+    private WinningNumbers setupWinningNumbers() {
+        while (true) {
+            try {
+                String rawWinningNumbers = inputView.readWinningNumbers();
+
+                return parseService.createWinningNumbersFromInput(rawWinningNumbers);
+            } catch (IllegalArgumentException e) {
+                String errorMessage = e.getMessage();
+                outputView.printError(errorMessage);
+            }
+        }
+    }
+
+    private BonusNumber setupBonusNumber() {
+        while (true) {
+            try {
+                String rawBonusNumber = inputView.readBonusNumber();
+
+                return parseService.createBonusNumberFromInput(rawBonusNumber);
             } catch (IllegalArgumentException e) {
                 String errorMessage = e.getMessage();
                 outputView.printError(errorMessage);

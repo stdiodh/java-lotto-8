@@ -50,24 +50,60 @@ public class ParseServiceTest {
     void 당첨_번호가_공백일_때_예외_태스트() {
         String rawWinningNumber = "";
 
-        assertThatThrownBy(() -> parseService.createPurchaseAmountFromInput(rawWinningNumber))
+        assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
+    }
+
+    @Test
+    void 당첨_번호가_6자리가_아닐_때_예외_테스트() {
+        String rawWinningNumber = "1,2,3,4";
+
+        assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 당첨 번호는 6개이여야 합니다.");
+    }
+
+    @Test
+    void 당첨_번호가_숫자가_아닌_값이_포함될_때_예외_테스트() {
+        String rawWinningNumber = "1,2,3,a,b,c";
+
+        assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
+                .isInstanceOfAny(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 숫자가 들어오도록 다시 입력해주세요.");
+    }
+
+    @Test
+    void 당첨_번호가_공백이_포함될_때_예외_테스트() {
+        String rawWinningNumber = "1,,3,4,5,6";
+
+        assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
     }
 
     @Test
     void 보너스_번호_파싱_성공_테스트() {
-        String rawWinningNumber = "7";
+        String rawBonusNumber = "7";
 
-        assertThat(parseService.createBonusNumberFromInput(rawWinningNumber)).isNotNull();
+        assertThat(parseService.createBonusNumberFromInput(rawBonusNumber)).isNotNull();
     }
 
     @Test
     void 보너스_번호가_공백일_때_예외_태스트() {
-        String rawWinningNumber = "";
+        String rawBonusNumber = "";
 
-        assertThatThrownBy(() -> parseService.createBonusNumberFromInput(rawWinningNumber))
+        assertThatThrownBy(() -> parseService.createBonusNumberFromInput(rawBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
+    }
+
+    @Test
+    void 보너스_번호가_숫자가_아닐_때_예외_테스트() {
+        String rawBonusNumber = "a";
+
+        assertThatThrownBy(() -> parseService.createBonusNumberFromInput(rawBonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 숫자가 들어오도록 다시 입력해주세요.");
     }
 }
