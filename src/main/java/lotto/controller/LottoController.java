@@ -21,7 +21,7 @@ public class LottoController {
     public void run() {
         PurchaseAmount purchaseAmount = setupPurchaseAmount();
         WinningNumbers winningNumbers = setupWinningNumbers();
-        BonusNumber bonusNumber = setupBonusNumber();
+        BonusNumber bonusNumber = setupBonusNumber(winningNumbers);
     }
 
     private PurchaseAmount setupPurchaseAmount() {
@@ -50,12 +50,15 @@ public class LottoController {
         }
     }
 
-    private BonusNumber setupBonusNumber() {
+    private BonusNumber setupBonusNumber(WinningNumbers winningNumbers) {
         while (true) {
             try {
                 String rawBonusNumber = inputView.readBonusNumber();
+                BonusNumber bonusNumber = parseService.createBonusNumberFromInput(rawBonusNumber);
 
-                return parseService.createBonusNumberFromInput(rawBonusNumber);
+                winningNumbers.validateBonusNumber(bonusNumber);
+
+                return bonusNumber;
             } catch (IllegalArgumentException e) {
                 String errorMessage = e.getMessage();
                 outputView.printError(errorMessage);

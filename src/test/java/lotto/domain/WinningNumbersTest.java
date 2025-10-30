@@ -1,9 +1,9 @@
 package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,8 @@ public class WinningNumbersTest {
     private static final List<Integer> ERROR_INVALID_SIZE_NUMBERS = Arrays.asList(1, 2, 3, 4, 5);
     private static final List<Integer> ERROR_DUPLICATE_NUMBERS = Arrays.asList(1, 1, 1, 1, 1, 1);
     private static final List<Integer> ERROR_INVALID_RANGE_NUMBERS = Arrays.asList(0, 2, 3, 4, 5, 46);
+    private static final int VALID_BONUS_NUMBER = 7;
+    private static final int DUPLICATE_BONUS_NUMBER = 6;
 
     @Test
     void 당첨_번호_생성_성공_테스트() {
@@ -30,7 +32,7 @@ public class WinningNumbersTest {
     void 당첨_번호_중_중복된_숫자가_있을_때_예외_테스트() {
         assertThatThrownBy(() -> new WinningNumbers(ERROR_DUPLICATE_NUMBERS))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 당첨 번호는 중복된 숫자가 없어야 합니다. 확인 후 다시 입력해주세요.");
+                .hasMessageContaining("[ERROR] 당첨 번호에 중복된 숫자가 없어야 합니다. 확인 후 다시 입력해주세요.");
     }
 
     @Test
@@ -38,6 +40,25 @@ public class WinningNumbersTest {
         assertThatThrownBy(() -> new WinningNumbers(ERROR_INVALID_RANGE_NUMBERS))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR] 당첨 번호는 1부터 45 사이의 숫자여야 합니다. 확인 후 다시 입력해주세요.");
+    }
+
+    @Test
+    void 보너스_번호_중복_성공_테스트() {
+        WinningNumbers winningNumbers = new WinningNumbers(SUCCESS_NUMBERS);
+        BonusNumber validBonusNumber = new BonusNumber(VALID_BONUS_NUMBER);
+
+        assertThatCode(() -> winningNumbers.validateBonusNumber(validBonusNumber))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    void 보너스_번호_중복_시_예외_테스트() {
+        WinningNumbers winningNumbers = new WinningNumbers(SUCCESS_NUMBERS);
+        BonusNumber duplicateBonusNumber = new BonusNumber(DUPLICATE_BONUS_NUMBER);
+
+        assertThatThrownBy(() -> winningNumbers.validateBonusNumber(duplicateBonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다. 확인 후 다시 입력해주세요.");
     }
 }
 

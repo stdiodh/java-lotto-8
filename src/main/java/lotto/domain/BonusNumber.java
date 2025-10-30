@@ -14,4 +14,8 @@ public class BonusNumber {
             throw new IllegalArgumentException(ERROR_INVALID_RANGE);
         }
     }
+
+    public int getNumber() {
+        return number;
+    }
 }
