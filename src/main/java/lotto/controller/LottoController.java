@@ -1,6 +1,9 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.domain.BonusNumber;
+import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.WinningNumbers;
 import lotto.service.ParseService;
@@ -11,17 +14,22 @@ public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final ParseService parseService;
+    private final LottoMachine lottoMachine;
 
     public LottoController(InputView inputView, OutputView outputView, ParseService parseService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.parseService = parseService;
+        this.lottoMachine = new LottoMachine();
     }
 
     public void run() {
         PurchaseAmount purchaseAmount = setupPurchaseAmount();
         WinningNumbers winningNumbers = setupWinningNumbers();
         BonusNumber bonusNumber = setupBonusNumber(winningNumbers);
+
+        int count = purchaseAmount.getLottoCount();
+        List<Lotto> lottos = lottoMachine.generateLottos(count);
     }
 
     private PurchaseAmount setupPurchaseAmount() {
