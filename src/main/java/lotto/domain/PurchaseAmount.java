@@ -10,7 +10,7 @@ public class PurchaseAmount {
     }
 
     private void validateSeparatedBy1000(Integer value) {
-        if(value % 1000 != 0) {
+        if (value % 1000 != 0) {
             throw new IllegalArgumentException(ERROR_NOT_SEPARATED_BY_1000);
         }
     }

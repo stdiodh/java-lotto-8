@@ -40,7 +40,7 @@ public class ParseService {
     }
 
     private void validateNullValue(String value) {
-        if(value == null || value.isBlank()) {
+        if (value == null || value.isBlank()) {
             throw new IllegalArgumentException(ERROR_NULL_VALUE);
         }
     }

@@ -16,7 +16,7 @@ public class WinningNumbers {
     }
 
     private void validateRange (List<Integer> numbers) {
-        for(Integer number : numbers) {
+        for (Integer number : numbers) {
             checkNumberInRange(number);
         }
     }
@@ -28,20 +28,20 @@ public class WinningNumbers {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if(numbers.size() != 6) {
+        if (numbers.size() != 6) {
             throw new IllegalArgumentException(ERROR_INVALID_SIZE);
         }
     }
 
     private void validateDuplicates(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        if(numbers.size() != uniqueNumbers.size()) {
+        if (numbers.size() != uniqueNumbers.size()) {
             throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBER);
         }
     }
 
     private void checkNumberInRange (int number) {
-        if(number < 1 || number > 45) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException(ERROR_INVALID_RANGE);
         }
     }

@@ -11,13 +11,13 @@ public class BonusNumber {
     }
 
     private void validateRange(int number) {
-        if(number < 1 || number > 45) {
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException(ERROR_INVALID_RANGE);
         }
     }
 
     public void validateDuplicate(WinningNumbers winningNumbers) {
-        if(winningNumbers.contains(this.number)) {
+        if (winningNumbers.contains(this.number)) {
             throw new IllegalArgumentException(ERROR_BONUS_DUPLICATE);
         }
     }
