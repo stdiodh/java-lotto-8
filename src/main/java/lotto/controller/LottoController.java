@@ -29,6 +29,9 @@ public class LottoController {
 
         int count = purchaseAmount.getLottoCount();
         List<Lotto> lottos = lottoMachine.generateLottos(count);
+
+        outputView.printLottoCount(count);
+        outputView.printLottos(lottos);
     }
 
     private PurchaseAmount setupPurchaseAmount() {

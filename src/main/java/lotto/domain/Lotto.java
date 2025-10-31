@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,5 +47,11 @@ public class Lotto {
 
     public boolean contains(int number) {
         return this.numbers.contains(number);
+    }
+
+    public List<Integer> getSortedNumber() {
+        List<Integer> sortedNumbers = new ArrayList<>(this.numbers);
+        Collections.sort(sortedNumbers);
+        return sortedNumbers;
     }
 }
