@@ -5,7 +5,6 @@ import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
 import lotto.service.ParseService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -25,7 +24,7 @@ public class LottoController {
 
     public void run() {
         PurchaseAmount purchaseAmount = setupPurchaseAmount();
-        WinningNumbers winningNumbers = setupWinningNumbers();
+        Lotto winningNumbers = setupWinningNumbers();
         BonusNumber bonusNumber = setupBonusNumber(winningNumbers);
 
         int count = purchaseAmount.getLottoCount();
@@ -45,7 +44,7 @@ public class LottoController {
         }
     }
 
-    private WinningNumbers setupWinningNumbers() {
+    private Lotto setupWinningNumbers() {
         while (true) {
             try {
                 String rawWinningNumbers = inputView.readWinningNumbers();
@@ -58,7 +57,7 @@ public class LottoController {
         }
     }
 
-    private BonusNumber setupBonusNumber(WinningNumbers winningNumbers) {
+    private BonusNumber setupBonusNumber(Lotto winningNumbers) {
         while (true) {
             try {
                 String rawBonusNumber = inputView.readBonusNumber();

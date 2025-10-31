@@ -2,8 +2,6 @@ package lotto.domain;
 
 public class PurchaseAmount {
     private final Integer lottoCount;
-    private static final String ERROR_NOT_SEPARATED_BY_1000 = "[ERROR] 구입 금액은 1,000원으로 나누어 떨어져야 합니다.";
-    private static final String ERROR_AMOUNT_IS_ZERO = "[ERROR] 구입 금액은 1000원 이상이어야 합니다.";
 
     public PurchaseAmount(Integer value) {
         validate(value);
@@ -17,13 +15,13 @@ public class PurchaseAmount {
 
     private void validateSeparatedBy1000(Integer value) {
         if (value % 1000 != 0) {
-            throw new IllegalArgumentException(ERROR_NOT_SEPARATED_BY_1000);
+            throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원으로 나누어 떨어져야 합니다.");
         }
     }
 
     private void validateAmountIsZero(Integer value) {
         if(value == 0) {
-            throw new IllegalArgumentException(ERROR_AMOUNT_IS_ZERO);
+            throw new IllegalArgumentException("[ERROR] 구입 금액은 최소 1000원 이상이어야 합니다.");
         }
     }
 

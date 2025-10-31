@@ -1,10 +1,10 @@
 package lotto.service;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParseServiceTest {
     private ParseService parseService;
@@ -27,7 +27,7 @@ public class ParseServiceTest {
 
         assertThatThrownBy(() -> parseService.createPurchaseAmountFromInput(rawPurchaseAmount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
+                .hasMessageContaining("[ERROR] 공백은 들어올 수 없습니다.");
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ParseServiceTest {
 
         assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
+                .hasMessageContaining("[ERROR] 공백은 들어올 수 없습니다.");
     }
 
     @Test
@@ -70,7 +70,7 @@ public class ParseServiceTest {
 
         assertThatThrownBy(() -> parseService.createWinningNumbersFromInput(rawWinningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
+                .hasMessageContaining("[ERROR] 공백은 들어올 수 없습니다.");
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ParseServiceTest {
 
         assertThatThrownBy(() -> parseService.createBonusNumberFromInput(rawBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.");
+                .hasMessageContaining("[ERROR] 공백은 들어올 수 없습니다.");
     }
 
     @Test

@@ -1,13 +1,13 @@
 package lotto.service;
 
 import lotto.domain.BonusNumber;
+import lotto.domain.Lotto;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
 
 public class LottoService {
     private final ParseService parseService;
     private PurchaseAmount purchaseAmount;
-    private WinningNumbers winningNumbers;
+    private Lotto winningNumbers;
     private BonusNumber bonusNumber;
 
     public LottoService(ParseService parseService) {

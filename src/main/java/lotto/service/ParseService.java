@@ -3,13 +3,11 @@ package lotto.service;
 import java.util.Arrays;
 import java.util.List;
 import lotto.domain.BonusNumber;
+import lotto.domain.Lotto;
 import lotto.domain.PurchaseAmount;
-import lotto.domain.WinningNumbers;
 
 public class ParseService {
     private static final String DELIMITER = ",";
-    private static final String ERROR_NULL_VALUE = "[ERROR] 공백은 들어올 수 없으니 다시 입력해주세요.";
-    private static final String ERROR_NOT_A_NUMBER = "[ERROR] 숫자가 들어오도록 다시 입력해주세요.";
 
     public PurchaseAmount createPurchaseAmountFromInput(String rawPurchaseAmount) {
         int number = validateAndParseNumber(rawPurchaseAmount);
@@ -17,7 +15,7 @@ public class ParseService {
         return new PurchaseAmount(number);
     }
 
-    public WinningNumbers createWinningNumbersFromInput(String rawWinningNumber) {
+    public Lotto createWinningNumbersFromInput(String rawWinningNumber) {
         validateNullValue(rawWinningNumber);
 
         List<Integer> numbers = Arrays.stream(rawWinningNumber.split(DELIMITER, -1))
@@ -25,7 +23,7 @@ public class ParseService {
                 .map(this::validateAndParseNumber)
                 .toList();
 
-        return new WinningNumbers(numbers);
+        return new Lotto(numbers);
     }
 
     public BonusNumber createBonusNumberFromInput(String rawBonusNumber) {
@@ -41,7 +39,7 @@ public class ParseService {
 
     private void validateNullValue(String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException(ERROR_NULL_VALUE);
+            throw new IllegalArgumentException("[ERROR] 공백은 들어올 수 없습니다.");
         }
     }
 
@@ -49,7 +47,7 @@ public class ParseService {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_NOT_A_NUMBER);
+            throw new IllegalArgumentException("[ERROR] 숫자가 들어오도록 다시 입력해주세요.");
         }
     }
 }
