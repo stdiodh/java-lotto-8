@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class BonusNumberTest {
+class BonusNumberTest {
     @Test
     void 보너스_번호가_1과_45사이일_때_성공_테스트() {
         assertThat(new BonusNumber(20)).isNotNull();
