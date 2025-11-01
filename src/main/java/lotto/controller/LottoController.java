@@ -1,10 +1,13 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Map;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
 import lotto.domain.LottoMachine;
 import lotto.domain.PurchaseAmount;
+import lotto.domain.Rank;
+import lotto.service.LottoService;
 import lotto.service.ParseService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -14,12 +17,15 @@ public class LottoController {
     private final OutputView outputView;
     private final ParseService parseService;
     private final LottoMachine lottoMachine;
+    private final LottoService lottoService;
 
-    public LottoController(InputView inputView, OutputView outputView, ParseService parseService) {
+    public LottoController(InputView inputView, OutputView outputView,
+                           ParseService parseService, LottoService lottoService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.parseService = parseService;
         this.lottoMachine = new LottoMachine();
+        this.lottoService = lottoService;
     }
 
     public void run() {
@@ -29,9 +35,12 @@ public class LottoController {
 
         int count = purchaseAmount.getLottoCount();
         List<Lotto> lottos = lottoMachine.generateLottos(count);
-
         outputView.printLottoCount(count);
         outputView.printLottos(lottos);
+
+        Map<Rank, Integer> statistics = lottoService.calculateStatistics(lottos, winningNumbers, bonusNumber);
+
+        outputView.printWinningStatistics(statistics);
     }
 
     private PurchaseAmount setupPurchaseAmount() {

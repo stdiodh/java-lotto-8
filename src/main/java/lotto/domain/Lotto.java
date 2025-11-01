@@ -54,4 +54,11 @@ public class Lotto {
         Collections.sort(sortedNumbers);
         return sortedNumbers;
     }
+
+    public int countMatchingNumbers(Lotto other) {
+        long matchCount = this.numbers.stream()
+                .filter(other.numbers::contains)
+                .count();
+        return (int) matchCount;
+    }
 }
