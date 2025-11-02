@@ -58,7 +58,7 @@ public class LottoServiceTest {
                 new Lotto(List.of(1, 2, 3, 10, 11, 12)) // 3개 일치 (5등)
         );
 
-        // (총 수입 : 5000 / 초기 자금 : 5000) * 100 = 500
+        // (총 수입 : 5000 / 초기 자금 : 1000) * 100 = 500
         Map<Rank, Integer> statistics = lottoService.calculateStatistics(purchasedLotto, winningLotto, bonusNumber);
         double totalReturn = lottoService.calculateTotalReturn(statistics, purchaseAmount);
 
