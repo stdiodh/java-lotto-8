@@ -11,7 +11,7 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
         ParseService parseService = new ParseService();
-        LottoService lottoService = new LottoService(parseService);
+        LottoService lottoService = new LottoService();
 
         LottoController lottoController = new LottoController(
                 inputView, outputView, parseService, lottoService);

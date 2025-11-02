@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.Map;
 import lotto.domain.BonusNumber;
 import lotto.domain.Lotto;
+import lotto.domain.LottoMachine;
 import lotto.domain.PurchaseAmount;
 import lotto.domain.Rank;
 
 public class LottoService {
-    private final ParseService parseService;
+    private final LottoMachine lottoMachine;
 
-    public LottoService(ParseService parseService) {
-        this.parseService = parseService;
+    public LottoService() {
+        this.lottoMachine = new LottoMachine();
+    }
+
+    public List<Lotto> purchaseLottos(int count) {
+        return lottoMachine.generateLottos(count);
     }
 
     public Map<Rank, Integer> calculateStatistics(List<Lotto> purchasedLottos, Lotto winningLotto, BonusNumber bonusNumber) {
