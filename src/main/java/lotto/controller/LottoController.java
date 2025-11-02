@@ -12,23 +12,21 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoController {
-    private final InputView inputView;
     private final OutputView outputView;
-    private final ParseService parseService;
     private final LottoService lottoService;
+    private final InputController inputController;
 
     public LottoController(InputView inputView, OutputView outputView,
                            ParseService parseService, LottoService lottoService) {
-        this.inputView = inputView;
         this.outputView = outputView;
-        this.parseService = parseService;
         this.lottoService = lottoService;
+        this.inputController = new InputController(inputView, outputView, parseService);
     }
 
     public void run() {
-        PurchaseAmount purchaseAmount = setupPurchaseAmount();
-        Lotto winningNumbers = setupWinningNumbers();
-        BonusNumber bonusNumber = setupBonusNumber(winningNumbers);
+        PurchaseAmount purchaseAmount = inputController.setupPurchaseAmount();
+        Lotto winningNumbers = inputController.setupWinningNumbers();
+        BonusNumber bonusNumber = inputController.setupBonusNumber(winningNumbers);
 
         int count = purchaseAmount.getLottoCount();
         List<Lotto> lottos = lottoService.purchaseLottos(count);
@@ -39,47 +37,5 @@ public class LottoController {
         double totalReturn = lottoService.calculateTotalReturn(statistics, purchaseAmount);
         outputView.printWinningStatistics(statistics);
         outputView.printTotalReturn(totalReturn);
-    }
-
-    private PurchaseAmount setupPurchaseAmount() {
-        while (true) {
-            try {
-                String rawPurchaseAmount = inputView.readPurchaseAmount();
-
-                return parseService.createPurchaseAmountFromInput(rawPurchaseAmount);
-            } catch (IllegalArgumentException e) {
-                String errorMessage = e.getMessage();
-                outputView.printError(errorMessage);
-            }
-        }
-    }
-
-    private Lotto setupWinningNumbers() {
-        while (true) {
-            try {
-                String rawWinningNumbers = inputView.readWinningNumbers();
-
-                return parseService.createWinningNumbersFromInput(rawWinningNumbers);
-            } catch (IllegalArgumentException e) {
-                String errorMessage = e.getMessage();
-                outputView.printError(errorMessage);
-            }
-        }
-    }
-
-    private BonusNumber setupBonusNumber(Lotto winningNumbers) {
-        while (true) {
-            try {
-                String rawBonusNumber = inputView.readBonusNumber();
-                BonusNumber bonusNumber = parseService.createBonusNumberFromInput(rawBonusNumber);
-
-                bonusNumber.validateDuplicate(winningNumbers);
-
-                return bonusNumber;
-            } catch (IllegalArgumentException e) {
-                String errorMessage = e.getMessage();
-                outputView.printError(errorMessage);
-            }
-        }
     }
 }
