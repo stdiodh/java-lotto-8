@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,11 +22,22 @@ public class PurchaseAmountTest {
     }
 
     @Test
-    void 로또_갯수_반환_테스트() {
+    void 투자금_계산_테스트() {
         PurchaseAmount purchaseAmount = new PurchaseAmount(8000);
 
-        int lottoCount = purchaseAmount.getLottoCount();
+        double investment = purchaseAmount.calculateInvestment();
 
-        assertThat(lottoCount).isEqualTo(8);
+        assertThat(investment).isEqualTo(8000.0);
+    }
+
+    @Test
+    void 로또_갯수_요청_테스트() {
+        PurchaseAmount purchaseAmount = new PurchaseAmount(8000);
+
+        LottoMachine lottoMachine = new LottoMachine();
+
+        List<Lotto> lottos = purchaseAmount.purchaseLottos(lottoMachine);
+
+        assertThat(lottos.size()).isEqualTo(8);
     }
 }

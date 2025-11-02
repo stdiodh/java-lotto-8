@@ -16,8 +16,8 @@ public class LottoService {
         this.lottoMachine = new LottoMachine();
     }
 
-    public List<Lotto> purchaseLottos(int count) {
-        return lottoMachine.generateLottos(count);
+    public List<Lotto> purchaseLottos(PurchaseAmount purchaseAmount) {
+        return purchaseAmount.purchaseLottos(this.lottoMachine);
     }
 
     public Map<Rank, Integer> calculateStatistics(List<Lotto> purchasedLottos, Lotto winningLotto, BonusNumber bonusNumber) {
@@ -28,7 +28,7 @@ public class LottoService {
 
         for (Lotto lotto : purchasedLottos) {
             int matchCount = lotto.countMatchingNumbers(winningLotto);
-            boolean bonusMatch = lotto.contains(bonusNumber.getNumber());
+            boolean bonusMatch = lotto.contains(bonusNumber);
 
             Rank rank = Rank.valueOfRank(matchCount, bonusMatch);
 
@@ -46,7 +46,7 @@ public class LottoService {
             totalPrizeMoney += (long) rank.getMoney() * count;
         }
 
-        double totalInvestment = purchaseAmount.getLottoCount() * 1000.0;
+        double totalInvestment = purchaseAmount.calculateInvestment();
 
         return (totalPrizeMoney / totalInvestment) * 100.0;
     }

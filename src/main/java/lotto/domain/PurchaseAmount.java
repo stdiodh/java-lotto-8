@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class PurchaseAmount {
     private static final String ERROR_NOT_DIVISIBLE_BY_1000 = "[ERROR] 구입 금액은 1,000원으로 나누어 떨어져야 합니다.";
     private static final String ERROR_AMOUNT_TOO_LOW = "[ERROR] 구입 금액은 최소 1,000원 이상이어야 합니다.";
@@ -28,11 +30,15 @@ public class PurchaseAmount {
         }
     }
 
-    private int calculatingTheNumberOfLotto(Integer value) {
-        return value / 1000;
+    public double calculateInvestment() {
+        return this.lottoCount * 1000.0;
     }
 
-    public int getLottoCount() {
-        return this.lottoCount;
+    public List<Lotto> purchaseLottos(LottoMachine lottoMachine) {
+        return lottoMachine.generateLottos(this.lottoCount);
+    }
+
+    private int calculatingTheNumberOfLotto(Integer value) {
+        return value / 1000;
     }
 }

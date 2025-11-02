@@ -18,7 +18,7 @@ public class LottoServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.lottoService = new LottoService(null);
+        this.lottoService = new LottoService();
         this.winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         this.bonusNumber = new BonusNumber(7);
     }

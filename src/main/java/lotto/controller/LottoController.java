@@ -26,9 +26,8 @@ public class LottoController {
         Lotto winningNumbers = inputController.setupWinningNumbers();
         BonusNumber bonusNumber = inputController.setupBonusNumber(winningNumbers);
 
-        int count = purchaseAmount.getLottoCount();
-        List<Lotto> lottos = lottoService.purchaseLottos(count);
-        outputView.printLottoCount(count);
+        List<Lotto> lottos = lottoService.purchaseLottos(purchaseAmount);
+        outputView.printLottoCount(lottos.size());
         outputView.printLottos(lottos);
 
         Map<Rank, Integer> statistics = lottoService.calculateStatistics(lottos, winningNumbers, bonusNumber);

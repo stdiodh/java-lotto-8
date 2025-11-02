@@ -49,11 +49,11 @@ public class Lotto {
         }
     }
 
-    public boolean contains(int number) {
-        return this.numbers.contains(number);
+    public boolean contains(BonusNumber bonusNumber) {
+        return bonusNumber.isContainedIn(this.numbers);
     }
 
-    public List<Integer> getSortedNumber() {
+    public List<Integer> getSortedNumbers() {
         List<Integer> sortedNumbers = new ArrayList<>(this.numbers);
         Collections.sort(sortedNumbers);
         return sortedNumbers;

@@ -47,7 +47,7 @@ class LottoTest {
         Lotto lotto = new Lotto(List.of(6, 5, 4, 3, 2, 1));
         List<Integer> expectedSortedList = List.of(1, 2, 3, 4, 5, 6);
 
-        List<Integer> sortedNumbers = lotto.getSortedNumber();
+        List<Integer> sortedNumbers = lotto.getSortedNumbers();
 
         assertThat(sortedNumbers).isEqualTo(expectedSortedList);
     }

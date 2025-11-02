@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.List;
+
 public class BonusNumber {
     private static final String ERROR_INVALID_RANGE = "[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.";
     private static final String ERROR_BONUS_DUPLICATE = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.";
@@ -18,12 +20,12 @@ public class BonusNumber {
     }
 
     public void validateDuplicate(Lotto winningNumbers) {
-        if (winningNumbers.contains(this.number)) {
+        if (winningNumbers.contains(this)) {
             throw new IllegalArgumentException(ERROR_BONUS_DUPLICATE);
         }
     }
 
-    public int getNumber() {
-        return this.number;
+    public boolean isContainedIn(List<Integer> numbers) {
+        return numbers.contains(this.number);
     }
 }
