@@ -8,6 +8,8 @@ import lotto.domain.PurchaseAmount;
 
 public class ParseService {
     private static final String DELIMITER = ",";
+    private static final String ERROR_BLANK_INPUT = "[ERROR] 공백은 들어올 수 없습니다.";
+    private static final String ERROR_NOT_A_NUMBER = "[ERROR] 숫자가 들어오도록 다시 입력해주세요.";
 
     public PurchaseAmount createPurchaseAmountFromInput(String rawPurchaseAmount) {
         int number = validateAndParseNumber(rawPurchaseAmount);
@@ -39,7 +41,7 @@ public class ParseService {
 
     private void validateNullValue(String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("[ERROR] 공백은 들어올 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_BLANK_INPUT);
         }
     }
 
@@ -47,7 +49,7 @@ public class ParseService {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자가 들어오도록 다시 입력해주세요.");
+            throw new IllegalArgumentException(ERROR_NOT_A_NUMBER);
         }
     }
 }

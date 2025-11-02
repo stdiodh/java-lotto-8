@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 public class Lotto {
+    private static final String ERROR_INVALID_SIZE = "[ERROR] 로또 번호는 6개여야 합니다.";
+    private static final String ERROR_DUPLICATE_NUMBERS = "[ERROR] 로또 번호에 중복된 숫자가 없어야 합니다.";
+    private static final String ERROR_INVALID_RANGE = "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.";
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -22,14 +26,14 @@ public class Lotto {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(ERROR_INVALID_SIZE);
         }
     }
 
     private void validateDuplicates(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (numbers.size() != uniqueNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호에 중복된 숫자가 없어야 합니다.");
+            throw new IllegalArgumentException(ERROR_DUPLICATE_NUMBERS);
         }
     }
 
@@ -41,7 +45,7 @@ public class Lotto {
 
     private void checkNumberInRange(int number) {
         if (number < 1 || number > 45) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException(ERROR_INVALID_RANGE);
         }
     }
 
