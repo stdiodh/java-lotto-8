@@ -51,4 +51,16 @@ class LottoTest {
 
         assertThat(sortedNumbers).isEqualTo(expectedSortedList);
     }
+
+    @Test
+    void 일치하는_번호_개수_카운트_테스트() {
+        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto sixNumbersMatchedlotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto threeNumbersMatchedlotto = new Lotto(List.of(1, 2, 3, 8, 9, 10));
+        Lotto zeroNumbersMatchedlotto = new Lotto(List.of(10, 11, 12, 13, 14, 15));
+
+        assertThat(winningNumbers.countMatchingNumbers(sixNumbersMatchedlotto)).isEqualTo(6);
+        assertThat(winningNumbers.countMatchingNumbers(threeNumbersMatchedlotto)).isEqualTo(3);
+        assertThat(winningNumbers.countMatchingNumbers(zeroNumbersMatchedlotto)).isEqualTo(0);
+    }
 }

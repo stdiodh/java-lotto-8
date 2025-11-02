@@ -41,4 +41,17 @@ public class LottoService {
 
         return result;
     }
+
+    public double calculateTotalReturn(Map<Rank, Integer> statistics, PurchaseAmount purchaseAmount) {
+        double totalPrizeMoney = 0;
+        for (Map.Entry<Rank, Integer> entry : statistics.entrySet()) {
+            Rank rank = entry.getKey();
+            int count = entry.getValue();
+            totalPrizeMoney += (long) rank.getMoney() * count;
+        }
+
+        double totalInvestment = purchaseAmount.getLottoCount() * 1000.0;
+
+        return (totalPrizeMoney / totalInvestment) * 100.0;
+    }
 }

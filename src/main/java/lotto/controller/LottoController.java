@@ -39,8 +39,9 @@ public class LottoController {
         outputView.printLottos(lottos);
 
         Map<Rank, Integer> statistics = lottoService.calculateStatistics(lottos, winningNumbers, bonusNumber);
-
+        double totalReturn = lottoService.calculateTotalReturn(statistics, purchaseAmount);
         outputView.printWinningStatistics(statistics);
+        outputView.printTotalReturn(totalReturn);
     }
 
     private PurchaseAmount setupPurchaseAmount() {
