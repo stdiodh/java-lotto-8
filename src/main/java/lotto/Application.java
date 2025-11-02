@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.controller.InputController;
 import lotto.controller.LottoController;
 import lotto.service.LottoService;
 import lotto.service.ParseService;
@@ -13,8 +14,11 @@ public class Application {
         ParseService parseService = new ParseService();
         LottoService lottoService = new LottoService();
 
+        InputController inputController = new InputController(
+                inputView, outputView, parseService);
         LottoController lottoController = new LottoController(
-                inputView, outputView, parseService, lottoService);
+                outputView, lottoService, inputController);
+
         lottoController.run();
     }
 }
