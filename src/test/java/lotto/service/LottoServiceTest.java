@@ -24,7 +24,7 @@ public class LottoServiceTest {
     }
 
     @Test
-    void 통계_계산_확인_테스트() {
+    void 당첨_통계_확인_테스트() {
         List<Lotto> purchasedLottos = List.of(
                 new Lotto(List.of(1, 2, 3, 10, 11, 12)), // 3개 일치 (5등)
                 new Lotto(List.of(1, 2, 40, 41, 42, 43)) // 2개 일치 (꽝)
@@ -38,7 +38,7 @@ public class LottoServiceTest {
     }
 
     @Test
-    void 통계_계산_테스트_2등_3등_구분() {
+    void 당첨_통계_2등_3등_구분_테스트() {
         List<Lotto> purchasedLottos = List.of(
                 new Lotto(List.of(1, 2, 3, 4, 5, 7)), // 5개 일치 + 보너스 (2등)
                 new Lotto(List.of(1, 2, 3, 4, 5, 8))  // 5개 일치 (3등)
